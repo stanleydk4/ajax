@@ -1,0 +1,1 @@
+insert into Users(username,password) values('abc','abc');
