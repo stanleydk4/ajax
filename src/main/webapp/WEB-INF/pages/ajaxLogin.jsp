@@ -65,8 +65,8 @@
                     type: 'POST',
                     data: $(this).serialize(),
                     success: function(response) {
-                        console.log(response)
-                        if (response.success) {
+                        console.log("AJAX Response:",response)
+                        if (response.isSuccess) {
                             window.location.href = '<%=request.getContextPath() %>/protected/index';
                         } else {
                             $('#errorMessage').text(response.message);

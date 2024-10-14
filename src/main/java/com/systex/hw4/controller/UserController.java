@@ -46,7 +46,13 @@ public class UserController {
 
     @PostMapping("/register")
     public String register(@ModelAttribute Users user, Model model,RedirectAttributes redirectAttributes) {
-        if (userService.register(user)) {
+    	if (user.getUsername() == null || user.getUsername().trim().isEmpty() ||
+    	        user.getPassword() == null || user.getPassword().trim().isEmpty()) {
+    	        model.addAttribute("error", "帳號和密碼不能為空白。");
+    	        return "register";
+    	}
+    	
+    	if (userService.register(user)) {
         	//model.addAttribute("error", "註冊成功!");
             //return "redirect:/login";
         	return "redirect:/login?error=regiSuccess";
@@ -90,7 +96,7 @@ public class UserController {
     }
     
     
-    @PostMapping("/ajaxLogin")
+    /*@PostMapping("/ajaxLogin")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> ajaxLogin(@RequestParam String username, @RequestParam String password, Model model,HttpSession session) {
         Map<String, Object> response = new HashMap<>();
@@ -104,5 +110,5 @@ public class UserController {
             response.put("message", "輸入的帳號密碼錯誤");
             return ResponseEntity.ok(response);
         }
-    }
+    }*/
 }
